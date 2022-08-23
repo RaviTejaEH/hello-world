@@ -19,7 +19,7 @@ pipeline{
         }
         stage('Deploy to container'){
             steps{
-                sh 'cp /root/.jenkins/workspace/Sample\ Build-Pipeline\ Script/webapp/target/*.war /opt/apache-tomcat-10.0.23/webapps/'
+                sh "cp /root/.jenkins/workspace/'Sample Build-Pipeline Script'/webapp/target/*.war /opt/apache-tomcat-10.0.23/webapps/"
             }
         }
     }
