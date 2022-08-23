@@ -12,6 +12,13 @@ pipeline{
                 echo 'executed 2nd command' 
             }
         }
+         stage('Checking Git-secrets in Git repo'){
+            steps{
+                sh 'rm /root/Desktop/trffulehog_report || true'
+                sh 'docker run -d --name trufflehog trufflehog:1.0 --json https://github.com/RaviTejaEH/hello-world.git > /root/Desktop/trffulehog_report'
+                sh 'cat /root/Desktop/trffulehog_report'
+            }
+        }
         stage('Build'){
             steps{
                 sh 'mvn clean package'
