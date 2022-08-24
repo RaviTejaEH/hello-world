@@ -15,6 +15,7 @@ pipeline{
          stage('Checking Git-secrets in Git repo'){
             steps{
                 sh 'rm /root/Desktop/trffulehog_report || true'
+                sh 'docker rm -f trufflehog || true'
                 sh 'docker run -d --name trufflehog trufflehog:1.0 --json https://github.com/RaviTejaEH/hello-world.git > /root/Desktop/trffulehog_report'
                 sh 'cat /root/Desktop/trffulehog_report'
             }
@@ -22,6 +23,7 @@ pipeline{
         stage('Source-Comppsition-analysis'){
             steps{
                 sh 'rm owasp* || true'
+                sh 'docker rm -f dependency-check || true'
                 sh "wget 'https://raw.githubusercontent.com/RaviTejaEH/hello-world/master/owasp-dependency-check.sh'"
                 sh 'chmod +x owasp-dependency-check.sh'
                 sh 'bash owasp-dependency-check.sh'
